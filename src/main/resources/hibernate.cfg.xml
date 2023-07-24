@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Configurações de conexão com o banco de dados -->
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/meu_banco_de_dados</property>
+        <property name="hibernate.connection.username">usuario</property>
+        <property name="hibernate.connection.password">senha</property>
+        
+        <!-- Dialeto SQL para o banco de dados específico -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+
+        <!-- Mostra as consultas SQL executadas pelo Hibernate -->
+        <property name="show_sql">true</property>
+
+        <!-- Cria as tabelas automaticamente se não existirem -->
+        <property name="hibernate.hbm2ddl.auto">create</property>
+
+        <!-- Mapeamento das classes de entidades -->
+        <mapping class="com.exemplo.EntidadeA" />
+        <mapping class="com.exemplo.EntidadeB" />
+        <!-- Adicione mais classes de entidades aqui -->
+    </session-factory>
+</hibernate-configuration>

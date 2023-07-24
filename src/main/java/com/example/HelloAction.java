@@ -8,13 +8,16 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import br.unb.dao.PessoaDAO;
+
 public class HelloAction extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		String name = request.getParameter("name");
 		HelloForm helloForm = (HelloForm) form;
 		helloForm.setMessage("Hello, " + name + "!");
-
+		PessoaDAO dao = new PessoaDAO();
+		dao.salvar();
 		return mapping.findForward("success");
 //		HelloForm helloForm = (HelloForm) form;
 //		helloForm.setMessage("Hello, World!");

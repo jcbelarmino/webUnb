@@ -1,4 +1,4 @@
-package br.unb.dao;
+package br.unb.dominio.heranca.dao;
 
 import java.util.List;
 
@@ -8,12 +8,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import br.unb.dominio.Endereco;
-import br.unb.dominio.Pessoa;
+import br.unb.dao.HibernateUtil;
+import br.unb.dominio.heranca.PessoaSingleTable;
 
 public class PessoaDAO {
 
-	public Pessoa salvar(Pessoa pessoa) {
+	public PessoaSingleTable salvar(PessoaSingleTable pessoa) {
 		// Configuração da sessão do Hibernate (SessionFactory)
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
@@ -33,11 +33,11 @@ public class PessoaDAO {
 
 	}
 
-	public Pessoa getById(Long id) {
+	public PessoaSingleTable getById(Long id) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 
 		// Usando get() para ler a pessoa com o ID especificado
-		Pessoa pessoa = (Pessoa) session.get(Pessoa.class, id);
+		PessoaSingleTable pessoa = (PessoaSingleTable) session.get(PessoaSingleTable.class, id);
 
 //		// Carregando uma pessoa com ID 
 //		Pessoa pessoa = (Pessoa) session.load(Pessoa.class, id);
@@ -47,7 +47,7 @@ public class PessoaDAO {
 		return pessoa;
 	}
 
-	public Pessoa update(Pessoa p) {
+	public PessoaSingleTable update(PessoaSingleTable p) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
 
@@ -66,7 +66,7 @@ public class PessoaDAO {
 		Transaction tx = session.beginTransaction();
 
 		// Lendo uma pessoa existente pelo ID
-		Pessoa pessoa = (Pessoa) session.get(Pessoa.class, id);
+		PessoaSingleTable pessoa = (PessoaSingleTable) session.get(PessoaSingleTable.class, id);
 
 		// Excluindo a pessoa do banco de dados
 		session.delete(pessoa);
@@ -76,20 +76,20 @@ public class PessoaDAO {
 
 	}
 
-	public List<Pessoa> findAll() {
+	public List<PessoaSingleTable> findAll() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Query query = session.createQuery("FROM Pessoa");
-		List<Pessoa> pessoas = query.list();
+		List<PessoaSingleTable> pessoas = query.list();
 		session.close();
 		return pessoas;
 	}
 
-	public List<Pessoa> findPorIdadeMinima(int idade) {
+	public List<PessoaSingleTable> findPorIdadeMinima(int idade) {
 		int idadeMinima = idade;
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Query query = session.createQuery("FROM Pessoa WHERE idade > :idade");
 		query.setParameter("idade", idadeMinima);
-		List<Pessoa> pessoas = query.list();
+		List<PessoaSingleTable> pessoas = query.list();
 		session.close();
 		return pessoas;
 	}
@@ -105,13 +105,13 @@ public class PessoaDAO {
 		return result;
 	}
 
-	public List<Pessoa> listByNomeSQL(String nome) {
+	public List<PessoaSingleTable> listByNomeSQL(String nome) {
 		String sql = "SELECT * FROM pessoa WHERE nome = :nome";
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		SQLQuery sqlQuery = session.createSQLQuery(sql);
-		sqlQuery.addEntity(Pessoa.class);
+		sqlQuery.addEntity(PessoaSingleTable.class);
 		sqlQuery.setParameter("nome", nome);
-		List<Pessoa> pessoas = sqlQuery.list();
+		List<PessoaSingleTable> pessoas = sqlQuery.list();
 		session.close();
 		return pessoas;
 

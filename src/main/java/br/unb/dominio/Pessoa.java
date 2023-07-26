@@ -1,6 +1,19 @@
 package br.unb.dominio;
 
-import javax.persistence.*;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "pessoas")
@@ -14,6 +27,37 @@ public class Pessoa {
     
     @Column(name = "idade")
     private int idade;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "endereco_id")
+    private Endereco endereco;
+    
+    @ManyToMany
+    @JoinTable(
+        name = "pessoa_projeto",
+        joinColumns = @JoinColumn(name = "pessoa_id"),
+        inverseJoinColumns = @JoinColumn(name = "projeto_id")
+    )
+    private List<Projeto> projetos;
+//    @ManyToOne
+//    @JoinColumn(name = "projeto_id")
+//    private Projeto projeto;
+    
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	public List<Projeto> getProjetos() {
+		return projetos;
+	}
+
+	public void setProjetos(List<Projeto> projetos) {
+		this.projetos = projetos;
+	}
 
 	public Long getId() {
 		return id;
@@ -38,7 +82,23 @@ public class Pessoa {
 	public void setIdade(int idade) {
 		this.idade = idade;
 	}
-    
+
+	@Override
+	public String toString() {
+		return "Pessoa [id=" + id + ", nome=" + nome + ", idade=" + idade + ", endereco=" + endereco + ", projetos="
+				+ projetos + "]";
+	}
+
+//	public Projeto getProjeto() {
+//		return projeto;
+//	}
+//
+//	public void setProjeto(Projeto projeto) {
+//		this.projeto = projeto;
+//	}
+//    
 
     // Construtores, getters e setters omitidos para brevidade
+	
+	
 }

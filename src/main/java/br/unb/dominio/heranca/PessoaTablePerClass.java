@@ -1,20 +1,21 @@
-package br.unb.dominio;
+package br.unb.dominio.heranca;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 @Entity
-@Table(name = "categorias")
-public class Categoria {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class PessoaTablePerClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nome")
+    @Column
     private String nome;
 
 	public Long getId() {
@@ -35,7 +36,10 @@ public class Categoria {
 
 	@Override
 	public String toString() {
-		return "Categoria [id=" + id + ", nome=" + nome + "]";
+		return "PessoaTablePerClass [id=" + id + ", nome=" + nome + "]";
 	}
 
+	
+    // Outros atributos e mapeamento comuns a todas as subclasses
+    
 }

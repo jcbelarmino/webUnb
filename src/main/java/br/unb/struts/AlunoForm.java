@@ -6,6 +6,7 @@ public class AlunoForm extends ActionForm {
 	private int id;
 	private String nome;
 	private String matricula;
+	private String method;
 
 	public int getId() {
 		return id;
@@ -31,6 +32,15 @@ public class AlunoForm extends ActionForm {
 		this.matricula = matricula;
 	}
 
+	public String getMethod() {
+		return method;
+	}
+
+	public void setMethod(String method) {
+		this.method = method;
+	}
+
+	
 	// Getters e Setters
 	// ...
 

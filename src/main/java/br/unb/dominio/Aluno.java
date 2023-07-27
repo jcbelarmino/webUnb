@@ -1,12 +1,27 @@
 package br.unb.dominio;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
- * @author 
+ * @author
  *
  */
+@Entity
+@Table(name = "aluno")
 public class Aluno {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@Column(name = "nome")
 	private String nome;
+	
+	@Column(name = "matricula")
 	private String matricula;
 
 	public Aluno() {
@@ -17,7 +32,6 @@ public class Aluno {
 		this.matricula = matricula;
 	}
 
-	
 	public Aluno(int id, String nome, String matricula) {
 		super();
 		this.id = id;

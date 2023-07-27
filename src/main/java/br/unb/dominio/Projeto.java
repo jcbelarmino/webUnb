@@ -20,8 +20,8 @@ public class Projeto {
     private String nome;
 
 //      para o mapeamento ManyToMany funcionar precisa descomentar em Pessoa
-        @ManyToMany(mappedBy = "projetos") 
-//    @OneToMany(mappedBy = "projeto")
+//        @ManyToMany(mappedBy = "projetos") 
+    @OneToMany(mappedBy = "projeto")
     private List<Pessoa> pessoas;
 
 	public Long getId() {

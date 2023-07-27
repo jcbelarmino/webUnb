@@ -10,6 +10,7 @@ import org.hibernate.Transaction;
 
 import br.unb.dominio.Endereco;
 import br.unb.dominio.Pessoa;
+import br.unb.dominio.Projeto;
 
 public class PessoaDAO {
 
@@ -32,7 +33,38 @@ public class PessoaDAO {
 		return pessoa;
 
 	}
+	public Projeto salvar(Projeto Projeto) {
+		// Configuração da sessão do Hibernate (SessionFactory)
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
 
+		// Iniciando a transação
+		Transaction tx = session.beginTransaction();
+
+		// Salvando a pessoa no banco de dados
+		session.save(Projeto);
+
+		// Comitando a transação
+		tx.commit();
+
+		// Fechando a sessão
+		session.close();
+		return Projeto;
+
+	}
+	public Projeto getProjetoById(Long id) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		// Usando get() para ler a pessoa com o ID especificado
+		Projeto projeto = (Projeto) session.get(Projeto.class, id);
+
+//		// Carregando uma pessoa com ID 
+//		Pessoa pessoa = (Pessoa) session.load(Pessoa.class, id);
+
+		// Encerrando a sessão
+		session.close();
+		return projeto;
+	}
 	public Pessoa getById(Long id) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 

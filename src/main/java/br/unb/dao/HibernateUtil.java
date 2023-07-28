@@ -1,7 +1,7 @@
 package br.unb.dao;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
     private static final SessionFactory sessionFactory = buildSessionFactory();
@@ -9,7 +9,7 @@ public class HibernateUtil {
     private static SessionFactory buildSessionFactory() {
         try {
             // Criando a fábrica de sessões a partir do arquivo de configuração "hibernate.cfg.xml"
-            return new AnnotationConfiguration().configure().buildSessionFactory();
+            return new Configuration().configure().buildSessionFactory();
         } catch (Throwable ex) {
             System.err.println("Erro ao criar a fábrica de sessões: " + ex);
             throw new ExceptionInInitializerError(ex);

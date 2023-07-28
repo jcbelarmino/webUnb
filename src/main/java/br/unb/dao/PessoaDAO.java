@@ -108,44 +108,44 @@ public class PessoaDAO {
 
 	}
 
-	public List<Pessoa> findAll() {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Query query = session.createQuery("FROM Pessoa");
-		List<Pessoa> pessoas = query.list();
-		session.close();
-		return pessoas;
-	}
+//	public List<Pessoa> findAll() {
+//		Session session = HibernateUtil.getSessionFactory().openSession();
+//		Query query = session.createQuery("FROM Pessoa", Pessoa.class);
+//		List<Pessoa> pessoas = query.list();
+//		session.close();
+//		return pessoas;
+//	}
 
-	public List<Pessoa> findPorIdadeMinima(int idade) {
-		int idadeMinima = idade;
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Query query = session.createQuery("FROM Pessoa WHERE idade > :idade");
-		query.setParameter("idade", idadeMinima);
-		List<Pessoa> pessoas = query.list();
-		session.close();
-		return pessoas;
-	}
+//	public List<Pessoa> findPorIdadeMinima(int idade) {
+//		int idadeMinima = idade;
+//		Session session = HibernateUtil.getSessionFactory().openSession();
+//		Query query = session.createQuery("FROM Pessoa WHERE idade > :idade", Pessoa.class);
+//		query.setParameter("idade", idadeMinima);
+//		List<Pessoa> pessoas = query.list();
+//		session.close();
+//		return pessoas;
+//	}
 
-	public List<Object[]> pessoasPorProjeto(int idProjeto) {
-		long projetoId = 1L;
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Query query = session.createQuery(
-				"SELECT COUNT(p), p.nome FROM Pessoa p WHERE p.projeto.id = :projetoId GROUP BY p.nome ORDER BY p.nome");
-		query.setParameter("projetoId", projetoId);
-		List<Object[]> result = query.list();
-		session.close();
-		return result;
-	}
+//	public List<Object[]> pessoasPorProjeto(int idProjeto) {
+//		long projetoId = 1L;
+//		Session session = HibernateUtil.getSessionFactory().openSession();
+//		Query query = session.createQuery(
+//				"SELECT COUNT(p), p.nome FROM Pessoa p WHERE p.projeto.id = :projetoId GROUP BY p.nome ORDER BY p.nome", Object[].class);
+//		query.setParameter("projetoId", projetoId);
+//		List<Object[]> result = query.list();
+//		session.close();
+//		return result;
+//	}
 
-	public List<Pessoa> listByNomeSQL(String nome) {
-		String sql = "SELECT * FROM pessoa WHERE nome = :nome";
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		SQLQuery sqlQuery = session.createSQLQuery(sql);
-		sqlQuery.addEntity(Pessoa.class);
-		sqlQuery.setParameter("nome", nome);
-		List<Pessoa> pessoas = sqlQuery.list();
-		session.close();
-		return pessoas;
-
-	}
+//	public List<Pessoa> listByNomeSQL(String nome) {
+//		String sql = "SELECT * FROM pessoa WHERE nome = :nome";
+//		Session session = HibernateUtil.getSessionFactory().openSession();
+//		SQLQuery sqlQuery = session.createSQLQuery(sql);
+//		sqlQuery.addEntity(Pessoa.class);
+//		sqlQuery.setParameter("nome", nome);
+//		List<Pessoa> pessoas = sqlQuery.list();
+//		session.close();
+//		return pessoas;
+//
+//	}
 }

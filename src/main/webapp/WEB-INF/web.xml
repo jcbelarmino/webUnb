@@ -1,35 +1,48 @@
 
-<web-app xmlns="http://java.sun.com/xml/ns/javaee" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5"
-          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-    <display-name>Hello Struts 1.2 Example</display-name>
+	<display-name>Hello Struts 1.2 Example</display-name>
+<!--
+	<servlet>
+		<servlet-name>action</servlet-name>
+		<servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>/WEB-INF/struts-config.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
 
-    <servlet>
-        <servlet-name>action</servlet-name>
-        <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
-        <init-param>
-            <param-name>config</param-name>
-            <param-value>/WEB-INF/struts-config.xml</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+	<servlet-mapping>
+		<servlet-name>action</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
 
-    <servlet-mapping>
-        <servlet-name>action</servlet-name>
-        <url-pattern>*.do</url-pattern>
-    </servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>hello.jsp</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<servlet-name>ExemploServlet</servlet-name>
+		<servlet-class>com.example.ExemploServlet</servlet-class>
+	</servlet>
+-->
+	<servlet-mapping>
+		<servlet-name>ExemploServlet</servlet-name>
+		<url-pattern>/exemplo</url-pattern>
+	</servlet-mapping>
+	<!-- Set the PROJECT_STAGE to 'Development' to receive constructive error 
+		messages during development. Change the PROJECT_STAGE to 'Production' when 
+		putting the application into production -->
+	<context-param>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+	</context-param>
 
-    <welcome-file-list>
-        <welcome-file>hello.jsp</welcome-file>
-    </welcome-file-list>
-    <servlet>
-        <servlet-name>ExemploServlet</servlet-name>
-        <servlet-class>com.example.ExemploServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>ExemploServlet</servlet-name>
-        <url-pattern>/exemplo</url-pattern>
-    </servlet-mapping>
+	<!-- add a welcome-file-list entry to allow JSF pages to be used as welcome 
+		files -->
+	<welcome-file-list>
+		<welcome-file>faces/index.xhtml</welcome-file>
+	</welcome-file-list>
 </web-app>

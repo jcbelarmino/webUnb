@@ -1,0 +1,48 @@
+<!-- index.xhtml -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Sistema de Gerenciamento de Alunos</title>
+</h:head>
+<h:body>
+	<ui:composition template="/templates/template.xhtml">
+		<ui:define name="body">
+			<h:form id="formAluno">
+				<p:panel header="Cadastro de Aluno">
+				<p:messages />
+				<h:panelGrid columns="2" cellpadding="5">
+						<h:outputLabel for="nome" value="Nome:" />
+						<p:inputText id="nome" value="#{alunoManagedBean.novoAluno.nome}"
+							required="true" />
+						<h:outputLabel for="matricula" value="Matrícula:" />
+						<p:inputText id="matricula" value="#{alunoManagedBean.novoAluno.matricula}"
+							required="true" />
+					</h:panelGrid>
+					<p:commandButton value="Cadastrar" action="#{alunoManagedBean.cadastrarAluno}" update="alunosTable" />
+
+				</p:panel>
+				<p:dataTable id="alunosTable" var="aluno"
+					value="#{alunoManagedBean.alunos}">
+					<p:column headerText="Nome">
+                #{aluno.nome}
+            </p:column>
+					<p:column headerText="Matrícula">
+                #{aluno.matricula}
+            </p:column>
+					<p:column headerText="Ações">
+						<p:commandButton value="Excluir"
+							action="#{alunoManagedBean.excluirAluno(aluno.id)}"
+							update="alunosTable" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

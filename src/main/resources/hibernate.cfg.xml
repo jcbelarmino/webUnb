@@ -17,7 +17,7 @@
 		<property name="show_sql">true</property>
 
 		<!-- Cria as tabelas automaticamente se não existirem -->
-		<property name="hibernate.hbm2ddl.auto">create</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
 
 		<!-- Mapeamento das classes de entidades -->
 		<mapping class="br.unb.dominio.Pessoa" />
@@ -26,8 +26,12 @@
 		<mapping class="br.unb.dominio.Categoria" />
 		<mapping class="br.unb.dominio.Endereco" />
 		<mapping class="br.unb.dominio.heranca.PessoaSingleTable" />
+		<mapping class="br.unb.dominio.heranca.PessoaJoined" />
 		<mapping class="br.unb.dominio.heranca.PessoaJuridica" />
 		<mapping class="br.unb.dominio.heranca.PessoaFisica" />
+		<mapping class="br.unb.dominio.Disciplina" />
+		<mapping class="br.unb.dominio.Aluno" />
+		<mapping class="br.unb.dominio.Professor" />
 		<!-- Adicione mais classes de entidades aqui -->
 	</session-factory>
 </hibernate-configuration>

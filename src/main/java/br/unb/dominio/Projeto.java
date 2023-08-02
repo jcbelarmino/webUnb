@@ -3,6 +3,7 @@ package br.unb.dominio;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Fetch;
 
 @Entity
 public class Projeto {
@@ -21,7 +24,7 @@ public class Projeto {
 
 //      para o mapeamento ManyToMany funcionar precisa descomentar em Pessoa
 //        @ManyToMany(mappedBy = "projetos") 
-    @OneToMany(mappedBy = "projeto")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "projeto")
     private List<Pessoa> pessoas;
 
 	public Long getId() {
@@ -50,7 +53,9 @@ public class Projeto {
 
 	@Override
 	public String toString() {
-		return "Projeto [id=" + id + ", nome=" + nome + ", pessoas=" + pessoas + "]";
+		return "Eager Projeto [id=" + id + ", nome=" + nome 
+				+ ", pessoas=" + getPessoas() 
+				+ "]";
 	}
 
 	

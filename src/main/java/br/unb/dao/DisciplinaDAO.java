@@ -1,21 +1,26 @@
 package br.unb.dao;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import br.unb.dominio.Endereco;
-import br.unb.dominio.Pessoa;
+import br.unb.dominio.Aluno;
+import br.unb.dominio.Disciplina;
 import br.unb.dominio.Projeto;
 
-public class PessoaDAO {
-
-	public Pessoa salvar(Pessoa pessoa) {
+public class DisciplinaDAO {
+	public Disciplina salvar(Disciplina disciplina) {
 		// Configuração da sessão do Hibernate (SessionFactory)
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
@@ -23,15 +28,15 @@ public class PessoaDAO {
 		// Iniciando a transação
 		Transaction tx = session.beginTransaction();
 
-		// Salvando a pessoa no banco de dados
-		session.save(pessoa);
+		// Salvando a disciplina no banco de dados
+		session.save(disciplina);
 
 		// Comitando a transação
 		tx.commit();
 
 		// Fechando a sessão
 		session.close();
-		return pessoa;
+		return disciplina;
 
 	}
 	public Projeto salvar(Projeto projeto) {
@@ -42,7 +47,7 @@ public class PessoaDAO {
 		// Iniciando a transação
 		Transaction tx = session.beginTransaction();
 
-		// Salvando a pessoa no banco de dados
+		// Salvando a disciplina no banco de dados
 		session.save(projeto);
 
 		// Comitando a transação
@@ -56,36 +61,35 @@ public class PessoaDAO {
 	public Projeto getProjetoById(Long id) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 
-		// Usando get() para ler a pessoa com o ID especificado
+		// Usando get() para ler a disciplina com o ID especificado
 		Projeto projeto = (Projeto) session.get(Projeto.class, id);
-//		Hibernate.initialize(projeto.getPessoas());
 
-//		// Carregando uma pessoa com ID 
-//		Pessoa pessoa = (Pessoa) session.load(Pessoa.class, id);
+//		// Carregando uma disciplina com ID 
+//		Disciplina disciplina = (Disciplina) session.load(Disciplina.class, id);
 
 		// Encerrando a sessão
 		session.close();
 		return projeto;
 	}
-	public Pessoa getById(Long id) {
+	public Disciplina getById(Long id) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 
-		// Usando get() para ler a pessoa com o ID especificado
-		Pessoa pessoa = (Pessoa) session.get(Pessoa.class, id);
+		// Usando get() para ler a disciplina com o ID especificado
+		Disciplina disciplina = (Disciplina) session.get(Disciplina.class, id);
 
-//		// Carregando uma pessoa com ID 
-//		Pessoa pessoa = (Pessoa) session.load(Pessoa.class, id);
+//		// Carregando uma disciplina com ID 
+//		Disciplina disciplina = (Disciplina) session.load(Disciplina.class, id);
 
 		// Encerrando a sessão
 		session.close();
-		return pessoa;
+		return disciplina;
 	}
 
-	public Pessoa update(Pessoa p) {
+	public Disciplina update(Disciplina p) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
 
-		// Atualizando a pessoa no banco de dados
+		// Atualizando a disciplina no banco de dados
 		session.update(p);
 
 		tx.commit();
@@ -99,55 +103,55 @@ public class PessoaDAO {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
 
-		// Lendo uma pessoa existente pelo ID
-		Pessoa pessoa = (Pessoa) session.get(Pessoa.class, id);
+		// Lendo uma disciplina existente pelo ID
+		Disciplina disciplina = (Disciplina) session.get(Disciplina.class, id);
 
-		// Excluindo a pessoa do banco de dados
-		session.delete(pessoa);
+		// Excluindo a disciplina do banco de dados
+		session.delete(disciplina);
 
 		tx.commit();
 		session.close();
 
 	}
 
-	public List<Pessoa> findAll() {
+	public List<Disciplina> findAll() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Query query = session.createQuery("FROM Pessoa");
-		List<Pessoa> pessoas = query.list();
+		Query query = session.createQuery("FROM Disciplina");
+		List<Disciplina> disciplinas = query.list();
 		session.close();
-		return pessoas;
+		return disciplinas;
 	}
 
-	public List<Pessoa> findPorIdadeMinima(int idade) {
+	public List<Disciplina> findPorIdadeMinima(int idade) {
 		int idadeMinima = idade;
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Query query = session.createQuery("FROM Pessoa WHERE idade > :idade");
+		Query query = session.createQuery("FROM Disciplina WHERE idade > :idade");
 		query.setParameter("idade", idadeMinima);
-		List<Pessoa> pessoas = query.list();
+		List<Disciplina> disciplinas = query.list();
 		session.close();
-		return pessoas;
+		return disciplinas;
 	}
 
-	public List<Object[]> pessoasPorProjeto(int idProjeto) {
+	public List<Object[]> disciplinasPorProjeto(int idProjeto) {
 		long projetoId = 1L;
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Query query = session.createQuery(
-				"SELECT COUNT(p), p.nome FROM Pessoa p WHERE p.projeto.id = :projetoId GROUP BY p.nome ORDER BY p.nome");
+				"SELECT COUNT(p), p.nome FROM Disciplina p WHERE p.projeto.id = :projetoId GROUP BY p.nome ORDER BY p.nome");
 		query.setParameter("projetoId", projetoId);
 		List<Object[]> result = query.list();
 		session.close();
 		return result;
 	}
 
-	public List<Pessoa> listByNomeSQL(String nome) {
-		String sql = "SELECT * FROM pessoa WHERE nome = :nome";
+	public List<Disciplina> listByNomeSQL(String nome) {
+		String sql = "SELECT * FROM disciplina WHERE nome = :nome";
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		SQLQuery sqlQuery = session.createSQLQuery(sql);
-		sqlQuery.addEntity(Pessoa.class);
+		sqlQuery.addEntity(Disciplina.class);
 		sqlQuery.setParameter("nome", nome);
-		List<Pessoa> pessoas = sqlQuery.list();
+		List<Disciplina> disciplinas = sqlQuery.list();
 		session.close();
-		return pessoas;
+		return disciplinas;
 
 	}
 }

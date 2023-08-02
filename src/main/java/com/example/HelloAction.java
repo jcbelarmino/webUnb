@@ -23,38 +23,38 @@ public class HelloAction extends Action {
 		HelloForm helloForm = (HelloForm) form;
 		PessoaDAO dao = new PessoaDAO();
 		// Criando uma nova pessoa
-		Pessoa pessoa = new Pessoa();
-		pessoa.setNome("Eduardo da Silva");
-		pessoa.setIdade(30);
-		pessoa.setSexo("M");
-
-		Endereco e = new Endereco();
-		e.setCidade("Brasilia");
-		e.setEstado("DF");
-		e.setRua("SQS108");
-		
-		Pessoa pessoa1 = new Pessoa();
-		pessoa1.setNome("jader");
-		pessoa1.setIdade(30);
-		pessoa1.setSexo("M");
-//		List<Pessoa> list = new ArrayList();
-//		list.add(pessoa1);
-//		list.add(pessoa);
+//		Pessoa pessoa = new Pessoa();
+//		pessoa.setNome("Eduardo da Silva");
+//		pessoa.setIdade(30);
+//		pessoa.setSexo("M");
+//
+//		Endereco e = new Endereco();
+//		e.setCidade("Brasilia");
+//		e.setEstado("DF");
+//		e.setRua("SQS108");
 //		
-		Projeto proj = new Projeto();
-		proj.setNome("SIPAC");
-		proj = dao.salvar(proj);
-		
-		pessoa.setEndereco(e);
-		pessoa.setProjeto(proj);
-		pessoa1.setEndereco(e);
-		pessoa1.setProjeto(proj);
-		pessoa = dao.salvar(pessoa);
-		pessoa1 = dao.salvar(pessoa1);
-		System.out.println("Pessoa Salva -> " + pessoa);
-		System.out.println("Pessoa Salva -> " + pessoa1);
+//		Pessoa pessoa1 = new Pessoa();
+//		pessoa1.setNome("jader");
+//		pessoa1.setIdade(30);
+//		pessoa1.setSexo("M");
+////		List<Pessoa> list = new ArrayList();
+////		list.add(pessoa1);
+////		list.add(pessoa);
+////		
+//		Projeto proj = dao.getProjetoById(1L);
+//		
+//		pessoa.setEndereco(e);
+//		pessoa.setProjeto(proj);
+//		pessoa1.setEndereco(e);
+//		pessoa1.setProjeto(proj);
+//		pessoa = dao.salvar(pessoa);
+//		pessoa1 = dao.salvar(pessoa1);
+//		System.out.println("Pessoa Salva -> " + pessoa);
+//		System.out.println("Pessoa Salva -> " + pessoa1);
 		Projeto projetoDB = dao.getProjetoById(1L);
+//		System.out.println("Pessoa 4 -> " + dao.getById(4L));
 		System.out.println(projetoDB);
+		
 //		PessoaFisica pf = new PessoaFisica();
 //		pf.setCpf("111.111.111-11");
 //		pf.setNome("pessoa física");
@@ -69,11 +69,11 @@ public class HelloAction extends Action {
 //		c.setNome("Auto");
 //		
 //		Produto p = new Produto();
-//		p.setCategoria(c);
+//		p.setCategoria(c); 
 //		ProdutoDAO dao = new ProdutoDAO();
 //		dao.salvar(p);
 
-		helloForm.setMessage("pessoa: " + pessoa + "!");
+		helloForm.setMessage("projeto: " + projetoDB+ "!");
 		return mapping.findForward("success");
 	}
 }

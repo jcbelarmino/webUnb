@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("F")
-public class PessoaFisica extends PessoaSingleTable {
+public class PessoaFisica extends PessoaJoined {
     @Column
     private String cpf;
     // Atributos e mapeamento específicos para Pessoa Física

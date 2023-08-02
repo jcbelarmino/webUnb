@@ -97,8 +97,7 @@ public class Pessoa {
 
 	@Override
 	public String toString() {
-		return "Pessoa [id=" + id + ", nome=" + nome +", sexo=" + sexo+ ", idade=" + idade + ", endereco=" + endereco + ", projeto="
-				+ projeto + "]";
+		return "Pessoa [id=" + id + ", nome=" + nome +", sexo=" + sexo+ ", idade=" + idade + ", endereco=" + endereco + "]";
 	}
 
 	public Projeto getProjeto() {

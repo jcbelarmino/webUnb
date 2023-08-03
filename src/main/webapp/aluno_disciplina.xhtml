@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>Vincular Aluno a Disciplina</title>
+</h:head>
+<h:body>
+    <h:form>
+        <p:panelGrid columns="2">
+            <p:outputLabel for="alunos" value="Aluno:" />
+            <p:selectOneMenu id="alunos" value="#{alunoDisciplinaBean.aluno.id}">
+                <f:selectItem itemLabel="Selecione um Aluno" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{alunoDisciplinaBean.alunos}" var="aluno" itemLabel="#{aluno.nome}" itemValue="#{aluno.id}" />
+            </p:selectOneMenu>
+
+            <p:outputLabel for="disciplinas" value="Disciplina:" />
+            <p:selectOneMenu id="disciplinas" value="#{alunoDisciplinaBean.disciplina.id}">
+                <f:selectItem itemLabel="Selecione uma Disciplina" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{alunoDisciplinaBean.disciplinas}" var="disciplina" itemLabel="#{disciplina.nome}" itemValue="#{disciplina.id}" />
+            </p:selectOneMenu>
+
+            <p:commandButton value="Vincular" action="#{alunoDisciplinaBean.vincularAlunoDisciplina}" update="@form" />
+        </p:panelGrid>
+
+        <h:messages />
+    </h:form>
+</h:body>
+</html>

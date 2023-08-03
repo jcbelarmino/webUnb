@@ -1,10 +1,17 @@
 package br.unb.dominio;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -23,6 +30,9 @@ public class Aluno {
 	
 	@Column(name = "matricula")
 	private String matricula;
+	
+	@ManyToMany(mappedBy = "alunos") 
+    private List<Disciplina> disciplinas;
 
 	public Aluno() {
 	}
@@ -61,6 +71,14 @@ public class Aluno {
 
 	public void setMatricula(String matricula) {
 		this.matricula = matricula;
+	}
+
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
 	}
 
 	@Override

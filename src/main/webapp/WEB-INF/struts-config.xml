@@ -3,21 +3,36 @@
     "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
     "http://struts.apache.org/dtds/struts-config_1_2.dtd">
 <struts-config>
-  <form-beans>
-    <form-bean name="helloForm" type="com.example.HelloForm"/>
-    <form-bean name="alunoForm" type="br.unb.struts.AlunoForm"/>
-    <form-bean name="disciplinaForm" type="br.unb.struts.DisciplinaForm"/>
-  </form-beans>
-  <action-mappings>
-    <action path="/hello" name="helloForm" type="com.example.HelloAction" scope="request" validate="false">
-      <forward name="success" path="/hello.jsp"/>
-    </action>
-    <action path="/aluno" name="alunoForm" type="br.unb.struts.AlunoAction" scope="request" validate="true">
-        <forward name="success" path="/aluno.jsp"/>
-    </action>
-    <action path="/disciplina" name="disciplinaForm" type="br.unb.struts.DisciplinaAction" scope="request" validate="true">
-        <forward name="success" path="/disciplina.jsp"/>
-    </action>
-  </action-mappings> 
-  <message-resources parameter="ApplicationResources" />
+	<form-beans>
+		<form-bean name="helloForm" type="com.example.HelloForm" />
+		<form-bean name="alunoForm" type="br.unb.struts.AlunoForm" />
+		<form-bean name="disciplinaForm"
+			type="br.unb.struts.DisciplinaForm" />
+		<form-bean name="alunoDisciplinaForm"
+			type="br.unb.struts.AlunoDisciplinaForm" />
+	</form-beans>
+	<action-mappings>
+		<action path="/hello" name="helloForm"
+			type="com.example.HelloAction" scope="request" validate="false">
+			<forward name="success" path="/hello.jsp" />
+		</action>
+		<action path="/aluno" name="alunoForm"
+			type="br.unb.struts.AlunoAction" scope="request" validate="true">
+			<forward name="success" path="/aluno.jsp" />
+		</action>
+		<action path="/disciplina" name="disciplinaForm"
+			type="br.unb.struts.DisciplinaAction" scope="request" validate="true">
+			<forward name="success" path="/disciplina.jsp" />
+		</action>
+		<action
+            path="/alunoDisciplina"
+            type="br.unb.struts.AlunoDisciplinaAction"
+            name="alunoDisciplinaForm"
+            scope="request"
+            validate="false">
+            <forward name="sucesso" path="/sucesso.jsp" />
+            <forward name="input" path="/vincular_aluno_disciplina.jsp" />
+        </action>
+	</action-mappings>
+	<message-resources parameter="ApplicationResources" />
 </struts-config>
